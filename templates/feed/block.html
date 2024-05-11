@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('thread', thread_id=post.id,
+            member_or_follower=post.member_or_follower) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+
+{% block sidepanel %}
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class = "form-group">
+            {{form.bname.label}}
+            {{ form.bname(class="form-control") }}
+        </div>
+    </fieldset>
+    <br>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+
+<br>
+    <div class="content-section">
+        <h3> Pending block requests </h3>
+        {% for req in pending_blk_req %}
+
+            <p>{{ req.username }} &ensp; <a class="article-title" href="{{url_for('accept_block_req',
+                from_username=req.username) }}"> Accept request</a></p>
+        {% endfor %}
+</div>
+
+<div class="content-section">
+    <h3> Membership block </h3>
+    {% for blk in curr_member_blk %}
+        <p>{{ blk.bname }} &ensp; <a class="article-title" href="{{url_for('remove_block_req',
+                blk_id=blk.bid) }}"> Remove membership </a> </p>
+    {% endfor %}
+</div>
+
+<div class="content-section">
+    <h3> Blocks followed by you </h3>
+    {% for blk in follow_blk %}
+        <p>{{ blk.bname }} &ensp; <a class="article-title" href="{{url_for('remove_block_req',
+                blk_id=blk.bid) }}"> Remove following </a></p>
+    {% endfor %}
+</div>
+{% endblock sidepanel %}
+
+
+<!--have to create a block that shows the respective side dive for each feed -->

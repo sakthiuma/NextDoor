@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+    {% for post in threads %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              {{ post.author }}
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2>{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+            <h5>  Previous Replies </h5>
+               {% for reply in post.replies %}
+                    <p>{{reply.reply_username}} ({{ reply.reply_date_posted }})  </p>
+                    <p>  ---> {{ reply.reply_msg }}</p> <br>
+                {% endfor %}
+          </div>
+        </article>
+        {% if post.member_or_follower == 1 %}
+            <fieldset class="form-group">
+                <div class="form-group">
+                    {{ form.content.label(class="form-control-label") }}
+                    {{ form.content(class="form-control form-control-lg") }}
+                </div>
+            </fieldset>
+
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    </form>
+{% endblock content %}

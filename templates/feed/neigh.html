@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('thread', thread_id=post.id,
+            member_or_follower=post.member_or_follower) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+
+{% block sidepanel %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <div class = "form-group">
+            <label> Select a user to be added as neighbor </label>
+            {{ form.neigh_username(class="form-control") }}
+        </div>
+    </fieldset>
+    <br>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-outline-info") }}
+    </div>
+</form>
+
+<br>
+    <div class="content-section">
+        <h3> Your Neighbor's </h3>
+        {% for neigh in neigh_users %}
+            <p>{{ neigh.neighbor }}</p>
+        {% endfor %}
+    </div>
+{% endblock sidepanel %}
+
+
+<!--have to create a block that shows the respective side dive for each feed -->

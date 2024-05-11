@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="content-section">
+        <div>
+            {% for user in user %}
+                <h3>Username: {{user.username}}</h3>
+                <h3>Name:  {{ user.name }}</h3>
+                <h3>Address: {{ user.address }}</h3>
+                <h3>Description: {{user.desc }}</h3>
+            {% endfor %}
+        </div>
+<!--        <form> comes here-->
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class = "border-bottom mb-3">Update Address</legend>
+                <div class ="form-group">
+                        {{ form.houseno.label(class="form-control-label") }}
+
+                        {% if form.houseno.errors %}
+                            {{ form.houseno(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form.houseno.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.houseno(class="form-control form-control-sm") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class ="form-group">
+                        {{ form.streetadd.label(class="form-control-label") }}
+
+                        {% if form.streetadd.errors %}
+                            {{ form.streetadd(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form.streetadd.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.streetadd(class="form-control form-control-sm") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class ="form-group">
+                        {{ form.aptno.label(class="form-control-label") }}
+                        {{ form.aptno(class="form-control form-control-sm") }}
+                    </div>
+
+                    <div class ="form-group">
+                        {{ form.city.label(class="form-control-label") }}
+
+                        {% if form.city.errors %}
+                            {{ form.city(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form.city.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.city(class="form-control form-control-sm") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class ="form-group">
+                        {{ form.state.label(class="form-control-label") }}
+
+                        {% if form.state.errors %}
+                            {{ form.state(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form.state.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.state(class="form-control form-control-sm") }}
+                        {% endif %}
+
+                    </div>
+
+                    <div class ="form-group">
+                        {{ form.zipcode.label(class="form-control-label") }}
+
+                        {% if form.zipcode.errors %}
+                            {{ form.zipcode(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form.zipcode.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.zipcode(class="form-control form-control-sm") }}
+                        {% endif %}
+
+                    </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form.submit(class = "btn btn-outline-info") }}
+            </div>
+
+        </form>
+
+        <br>
+
+        <form method="POST">
+            {{ form2.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class = "border-bottom mb-3">Update Description</legend>
+                <div class ="form-group">
+                    {{ form2.description.label(class="form-control-label") }}
+                    {% if form2.description.errors %}
+                            {{ form2.description(class="form-control form-control-sm is-invalid") }}
+                            <div class = "invalid-feedback">
+                                {% for error in form2.description.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form2.description(class="form-control form-control-sm") }}
+                        {% endif %}
+<!--                    {{ form2.description(class="form-control form-control-sm") }}-->
+                </div>
+            </fieldset>
+            <br>
+            <div class="form-group">
+                {{ form2.submit(class = "btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+
+{% endblock content %}

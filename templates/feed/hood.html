@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for post in posts %}
+
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ post.author }}</a>
+              <small class="text-muted">{{ post.date_posted }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('thread', thread_id=post.id,
+            member_or_follower=post.member_or_follower) }}">{{ post.title }}</a></h2>
+            <p class="article-content">{{ post.content }}</p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+
+{% block sidepanel %}
+    <div class="content-section">
+    <h3> Membership hood </h3>
+    {% for hood in curr_member_hood %}
+        <p>{{ hood.hname }} </p>
+    {% endfor %}
+</div>
+
+{% endblock sidepanel %}
+
+
+<!--have to create a block that shows the respective side dive for each feed -->
